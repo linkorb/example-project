@@ -1,2 +1,5 @@
-image: php:7.0-cli
-script: make all
+pipeline:
+  main:
+    image: php:7.0-cli
+    commands:
+      - make all
