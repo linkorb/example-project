@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+use Example\Hello;
+
+$name = getenv('HELLO_NAME');
+$hello = new Hello();
+echo $hello->hello($name) . PHP_EOL;
