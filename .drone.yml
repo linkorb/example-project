@@ -1,2 +1,21 @@
-image: php:7.0-cli
-script: make all
+clone:
+  git:
+    image: plugins/git
+    depth: 5
+
+pipeline:
+  build:
+    image: php:7
+    commands:
+      - apt-get update
+      - apt-get install -y zip git
+      - curl -LsS https://getcomposer.org/composer.phar -o /usr/bin/composer
+      - chmod +x /usr/bin/composer
+      - make all
+  publish:
+    image: plugins/docker
+    repo: registry.linkorb.com/drone/example-project
+    registry: registry.linkorb.com
+    use_cache: true
+    auto_tag: true
+    secrets: [ docker_username, docker_password ]

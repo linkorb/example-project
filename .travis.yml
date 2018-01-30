@@ -10,22 +10,21 @@ cache:
   directories:
     - $HOME/.composer/cache/files
 
-matrix:
-  fast_finish: true
-  include:
-    - php: 5.6
-    - php: 7.0
+php:
+  - 5.6
+  - 7.0
 
 script:
   - make all
 
-after_success:
-  # - make docker-publish
-  - make docker-login
-  - export COMMIT=${TRAVIS_COMMIT::8}
-  - export REPO=registry.linkorb.com/linkorb/example-project
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-  - docker push $REPO
+# after_success:
+#   - if [ "$TRAVIS_BRANCH" == "master" ]; then
+#     make docker-publish;
+#     fi
+
+jobs:
+  include:
+    - stage: deploy
+      script: make build docker-publish
+      php: 7.0
+      if: branch = master
