@@ -25,6 +25,6 @@ script:
 jobs:
   include:
     - stage: deploy
-      script: make docker-publish
+      script: make build docker-publish
       php: 7.0
       if: branch = master
