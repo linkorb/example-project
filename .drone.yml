@@ -15,4 +15,6 @@ pipeline:
   publish:
     image: plugins/docker
     repo: registry.linkorb.com/drone/example-project
-    tags: [ latest ]
+    registry: registry.linkorb.com
+    auto_tag: true
+    secrets: [ docker_username, docker_password ]
