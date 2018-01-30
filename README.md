@@ -8,3 +8,5 @@ This example project demonstrates the usage of:
 * Makefile
 * phpunit.xml
 * Dockerfile
+
+(c) 2018 LinkORB
