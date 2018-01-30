@@ -39,7 +39,10 @@ docker-publish: docker-login ## Build and publish docker image to registry
 	docker build -t registry.linkorb.com/linkorb/example-project:$(GIT_COMMIT) .
 	docker tag registry.linkorb.com/linkorb/example-project:$(GIT_COMMIT) registry.linkorb.com/linkorb/example-project:latest
 ifdef TRAVIS_BUILD_NUMBER
-	docker tag registry.linkorb.com/linkorb/example-project:$(GIT_COMMIT) registry.linkorb.com/linkorb/example-project:build-$(TRAVIS_BUILD_NUMBER)
+	docker tag registry.linkorb.com/linkorb/example-project:$(GIT_COMMIT) registry.linkorb.com/linkorb/example-project:travis-$(TRAVIS_BUILD_NUMBER)
+endif
+ifdef CIRCLE_BUILD_NUM
+	docker tag registry.linkorb.com/linkorb/example-project:$(GIT_COMMIT) registry.linkorb.com/linkorb/example-project:circleci-$(CIRCLE_BUILD_NUM)
 endif
 	docker push registry.linkorb.com/linkorb/example-project
 
