@@ -16,5 +16,6 @@ pipeline:
     image: plugins/docker
     repo: registry.linkorb.com/drone/example-project
     registry: registry.linkorb.com
+    use_cache: true
     auto_tag: true
     secrets: [ docker_username, docker_password ]
