@@ -14,5 +14,5 @@ pipeline:
       - make all
   publish:
     image: plugins/docker
-    repo: drone/example-project
+    repo: registry.linkorb.com/drone/example-project
     tags: [ latest ]
