@@ -4,7 +4,7 @@
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-all: build test
+all: build test docker-login docker-build docker-push
 
 .PHONY: clean
 clean:
