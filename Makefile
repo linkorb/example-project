@@ -27,6 +27,18 @@ vendor: composer.lock ## Install vendor libraries
 	composer install
 	touch vendor/
 
+docker-login:
+	docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" registry.linkorb.com
+
+docker-build: ## Build docker image
+	docker build -t registry.linkorb.com/linkorb/example-project .
+
+docker-run: docker-build ## Run application as docker imae
+	docker run -it -e HELLO_NAME='Galaxy' --rm example-project
+
+docker-push:
+	docker push registry.linkorb.com/linkorb/example-project
+
 test: build phpqa-phpunit phpqa-phpcs ## Run tests
 
 phpqa-phpunit: ## Run phpunit tests
