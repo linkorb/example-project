@@ -1,5 +1,8 @@
 .PHONY: help
 
+GIT_COMMIT=$(shell git rev-parse --verify HEAD --short)
+
+
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -32,10 +35,13 @@ docker-build: ## Build docker image
 docker-run: ## Run application as docker image
 	docker run -it -e HELLO_NAME='Galaxy' --rm example-project
 
-docker-push:
+docker-publish: docker-login ## Build and publish docker image to registry
+	docker build -t registry.linkorb.com/linkorb/example-project:$(GIT_COMMIT) .
+	docker tag registry.linkorb.com/linkorb/example-project:$(GIT_COMMIT) registry.linkorb.com/linkorb/example-project:latest
+ifdef TRAVIS_BUILD_NUMBER
+	docker tag registry.linkorb.com/linkorb/example-project:$(GIT_COMMIT) registry.linkorb.com/linkorb/example-project:build-$(TRAVIS_BUILD_NUMBER)
+endif
 	docker push registry.linkorb.com/linkorb/example-project
-
-docker-publish: docker-login docker-build docker-push ## Build and publish docker image to registry
 
 test: build phpqa-phpunit phpqa-phpcs ## Run tests
 
