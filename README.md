@@ -9,4 +9,4 @@ This example project demonstrates the usage of:
 * phpunit.xml
 * Dockerfile
 
-(c) 2018 LinkORB
+(c) 2018 LinkORB.
