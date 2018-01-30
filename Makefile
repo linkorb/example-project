@@ -20,10 +20,10 @@ build: .env vendor ## Build it
 	@echo "Building"
 
 composer.lock: ## Generate composer.lock
-	composer update
+	composer update -q --prefer-dist
 
 vendor: composer.lock ## Install vendor libraries
-	composer install
+	composer install -q --prefer-dist
 	touch vendor/
 
 docker-login:
