@@ -35,4 +35,5 @@ jobs:
 
       # run tests!
       - run: make test
-      - publish: make docker-publish
+      # publish!
+      - run: make docker-publish
