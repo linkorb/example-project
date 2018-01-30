@@ -46,7 +46,7 @@ endif
 test: build phpqa-phpunit phpqa-phpcs ## Run tests
 
 phpqa-phpunit: ## Run phpunit tests
-	phpunit
+	vendor/bin/phpunit
 
 phpqa-phpcs: ## Run phpcs tests
 	vendor/bin/phpcs --standard=PSR2 src/ tests/
