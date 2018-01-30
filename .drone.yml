@@ -12,3 +12,7 @@ pipeline:
       - curl -LsS https://getcomposer.org/composer.phar -o /usr/bin/composer
       - chmod +x /usr/bin/composer
       - make all
+  publish:
+    image: plugins/docker
+    repo: drone/example-project
+    tags: [ latest ]
