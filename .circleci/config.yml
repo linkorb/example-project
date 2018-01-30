@@ -37,5 +37,5 @@ jobs:
       - run: make test
       # publish!
       - setup_remote_docker:
-        docker_layer_caching: true
+          docker_layer_caching: true
       - run: make docker-publish
