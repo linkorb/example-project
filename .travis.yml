@@ -19,7 +19,14 @@ matrix:
 script:
   - make all
 
-after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    make docker-publish;
-    fi
+# after_success:
+#   - if [ "$TRAVIS_BRANCH" == "master" ]; then
+#     make docker-publish;
+#     fi
+
+jobs:
+  include:
+    - stage: deploy
+      script: make docker-publish
+      php: 7.0
+      if: branch = master
