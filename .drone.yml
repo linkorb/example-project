@@ -7,4 +7,8 @@ pipeline:
   build:
     image: php:7
     commands:
+      - apt-get update
+      - apt-get install zip git
+      - curl -LsS https://getcomposer.org/composer.phar -o /usr/bin/composer
+      - chmod +x /usr/bin/composer
       - make all
